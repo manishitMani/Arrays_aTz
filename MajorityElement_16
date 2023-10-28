@@ -1,0 +1,29 @@
+ BETTER
+
+import java.util.*;
+public class Solution {
+    public static int majorityElement(int []v) {
+        Map<Integer,Integer> map= new HashMap<>();
+        for(int i=0; i<v.length; i++){
+            if(map.containsKey(v[i])){
+                int val= map.get(v[i]);
+                map.put(v[i],val+1);
+            }
+            else{
+                map.put(v[i],1);
+            }
+        }
+        int ans=-1;
+        int count= v.length/2;
+        for(Map.Entry<Integer,Integer> e: map.entrySet()){
+            int val= e.getValue();
+            if(val>count){
+                ans= e.getKey();
+                break;
+            }
+        }
+        return ans;
+    }
+}
+
+OPTIMAL - MOORES VOTING ALGO
