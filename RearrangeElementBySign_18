@@ -1,0 +1,22 @@
+import java.util.*;
+public class Solution {
+    public static int[] alternateNumbers(int []a) {
+       Queue<Integer> pos= new LinkedList<>();
+       Queue<Integer> neg= new LinkedList<>();
+       for(int i=0; i<a.length; i++){
+           if(a[i]>0){
+               pos.offer(a[i]);
+           }
+           else{
+               neg.offer(a[i]);
+           }
+       }
+       int i=0;
+       int[] arr= new int[a.length];
+       while(i<a.length){
+           arr[i++]=pos.poll();
+           arr[i++]=neg.poll();
+       }
+       return arr;
+    }
+}
