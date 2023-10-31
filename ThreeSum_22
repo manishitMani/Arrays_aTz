@@ -1,0 +1,67 @@
+import java.util.*;
+public class Solution {
+    public static List< List < Integer > > triplet(int n, int []arr) {
+        Set<List<Integer>> set= new HashSet<>();
+        List<List<Integer>> list= new ArrayList<>();
+        for(int i=0; i<n-1; i++){
+            Set<Integer> st= new HashSet<>();
+            for(int j=i+1; j<n; j++){
+               int third= -(arr[i]+arr[j]);
+               if(st.contains(third)){
+                   List<Integer> l= new ArrayList<>();
+                   l.add(arr[i]);
+                   l.add(arr[j]);
+                   l.add(third);
+                   Collections.sort(l);
+                   set.add(l);
+               }
+               else{
+                   st.add(arr[j]);
+               }
+            }
+        }
+
+        for(List<Integer> lst: set){
+            list.add(lst);
+        }
+        return list;
+    }
+}
+
+
+OPTIMAL SOLUTION
+
+import java.util.*;
+public class Solution {
+    public static List< List < Integer > > triplet(int n, int []arr) {
+        Arrays.sort(arr);
+        List<List<Integer>> list= new ArrayList<>();
+        for(int i=0; i<n; i++){
+            if(i>0 && arr[i]==arr[i-1]) continue;
+            int j= i+1;
+            int k= n-1;
+            while(j<k){
+                int sum= arr[i]+arr[j]+arr[k];
+                if(sum<0){
+                    j++;
+                }
+                else if(sum>0){
+                    k--;
+                }
+                else{
+                    List<Integer> l= new ArrayList<>();
+                    l.add(arr[i]);
+                    l.add(arr[j]);
+                    l.add(arr[k]);
+                    j++;
+                    k--;
+                    list.add(l);
+                    while(j<k && arr[j]==arr[j-1]) j++;
+                    while(j<k && arr[k]==arr[k+1]) k--;
+                }
+            }
+            
+        }
+        return list;
+    }
+}
